@@ -1,0 +1,6 @@
+Base path: 'D:/Gilang/Editor/Data', plugins path 'D:/Gilang/Editor/Data/PlaybackEngines'
+Cmd: initializeCompiler
+
+Cmd: shutdown
+
+Quitting shader compiler process
