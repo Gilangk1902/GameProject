@@ -28,7 +28,7 @@ public class shotGun : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Mouse0)){
             if(wait == false && ammo != 0){
-                anim.Play("Armature|shoot", 0, 0.0f);
+                anim.Play("shoot", 0, 0.0f);
                 ammo--;
                 wait = true;
                 if(Physics.Raycast(cam.transform.position, cam.transform.forward + randomSpread(), out hit)){
@@ -108,7 +108,7 @@ public class shotGun : MonoBehaviour
                 Invoke("waitNoMore", attackSpeed);
             }
             else if(ammo == 0){
-                anim.Play("Armature|reloading", 0, 0.0f);
+                anim.Play("reloading", 0, 0.0f);
                 Invoke("reloading", 4f);
             }
         }
