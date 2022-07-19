@@ -9,6 +9,12 @@ public class AI : MonoBehaviour
     bool playerInSight; bool playerInAttackRange; bool isWalkPointSet = false; bool walkPointSet = false;
     public Vector3 runTo;
     bool isMoving = false;
+    public GameObject projectlie;
+    public GameObject projectileSpawnPoint;
+    public GameObject eye;
+    public bool readyToFire = true;
+    public bool targetLocked = true;
+    int burstCount = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,15 +29,53 @@ public class AI : MonoBehaviour
         playerInSight = Physics.CheckSphere(transform.position, 50f, playerMask);
         playerInAttackRange = Physics.CheckSphere(transform.position, 15f, playerMask);
         if(playerInAttackRange){
+            targeting();
             positioning();
-
+            attacking();
         }
         else if(playerInSight){
             chasePlayer();
         }
-
+        else if (!playerInSight){
+            patrol();
+        }
     }
-
+    void shoot(){
+        Instantiate(projectlie, projectileSpawnPoint.transform.position, transform.rotation);
+    }
+    void waitShoot(){
+        readyToFire = true;
+    }
+    void lostTarget(){
+        targetLocked = false;
+    }
+    void targeting(){
+        RaycastHit hit;
+        float thickness = 2f;
+        if(Physics.SphereCast(eye.transform.position, thickness, eye.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, playerMask)){
+            targetLocked = true;
+            Debug.Log("target locked");
+        }
+        else
+            Invoke("lostTarget", 1f);
+    }
+    void attacking(){
+        if(!isMoving && readyToFire && targetLocked == true){
+            shoot();
+            readyToFire = false;
+            if(burstCount < 4){
+                Invoke("waitShoot", 0.5f);
+                burstCount++;
+            }
+            else{
+                Invoke("waitShoot", 2f);
+                burstCount=0;
+            }
+        }
+        else{
+            //bruh
+        }
+    }
     void positioning(){
         if(!walkPointSet && !isMoving){
             standStill();
@@ -55,6 +99,15 @@ public class AI : MonoBehaviour
         isMoving = false;
     }
     void randomManuver(){
+        isMoving = true;
+        float randomZ = Random.Range(-50f, 50f);
+        float randomX = Random.Range(-50f, 50f);
+
+        runTo = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+        walkPointSet = true;
+        lookAtDestination();
+    }
+    void patrol(){
         isMoving = true;
         float randomZ = Random.Range(-50f, 50f);
         float randomX = Random.Range(-50f, 50f);

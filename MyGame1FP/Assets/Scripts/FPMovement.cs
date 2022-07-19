@@ -28,6 +28,13 @@ public class FPMovement : MonoBehaviour
     }
 
     void movement(){
+        if(Input.GetKey(KeyCode.LeftShift)){
+            speed = 12f;
+        }
+        else{
+            speed = 6f;
+        }
+
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 

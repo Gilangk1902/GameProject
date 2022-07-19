@@ -109,7 +109,7 @@ public class shotGun : MonoBehaviour
             }
             else if(ammo == 0){
                 anim.Play("reloading", 0, 0.0f);
-                Invoke("reloading", 4f);
+                Invoke("reloading", 2f);
             }
         }
     }
