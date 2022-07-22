@@ -388,7 +388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149ddbc28202bb0499189c39a182aa7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: 0
+  playerHealth: 100
   mSpeedMult: 1
   aSpeedMult: 10
 --- !u!114 &504557049

@@ -54,7 +54,6 @@ public class AI : MonoBehaviour
         float thickness = 2f;
         if(Physics.SphereCast(eye.transform.position, thickness, eye.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, playerMask)){
             targetLocked = true;
-            Debug.Log("target locked");
         }
         else
             Invoke("lostTarget", 1f);

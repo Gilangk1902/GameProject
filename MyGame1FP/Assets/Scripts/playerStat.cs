@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class playerStat : MonoBehaviour
 {
-    public float playerHealth;
+    public float playerHealth = 0f;
     
     //STATS==============================
     FPMovement movementVar; shotGun attackVar;
@@ -18,7 +18,9 @@ public class playerStat : MonoBehaviour
     }
     void Update()
     {
+        Debug.Log("PLAYER HEALTH " + playerHealth);
         if(playerHealth<=0){
+            Debug.Log("DEAD");
             Destroy(gameObject);
         }
         if(Input.GetKeyDown(KeyCode.P)){

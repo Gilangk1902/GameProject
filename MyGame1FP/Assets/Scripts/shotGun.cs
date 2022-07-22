@@ -32,75 +32,59 @@ public class shotGun : MonoBehaviour
                 ammo--;
                 wait = true;
                 if(Physics.Raycast(cam.transform.position, cam.transform.forward + randomSpread(), out hit)){
-                    Debug.Log("HIT");
                     Instantiate(bullet, hit.point, hit.transform.rotation);
                     
                     if(hit.collider.tag == "Enemy"){
                         enemy.health = enemy.health - 6;
-                        Debug.Log(enemy.health);
                     }
                 }
                 if(Physics.Raycast(cam.transform.position, cam.transform.forward + randomSpread(), out hit)){
-                    Debug.Log("HIT");
                     Instantiate(bullet, hit.point, hit.transform.rotation);
                     
                     if(hit.collider.tag == "Enemy"){
                         enemy.health = enemy.health - 6;
-                        Debug.Log(enemy.health);
                     }
                 }
                 if(Physics.Raycast(cam.transform.position, cam.transform.forward + randomSpread(), out hit)){
-                    Debug.Log("HIT");
                     Instantiate(bullet, hit.point, hit.transform.rotation);
                     
                     if(hit.collider.tag == "Enemy"){
                         enemy.health = enemy.health - 6;
-                        Debug.Log(enemy.health);
                     }
                 }
                 if(Physics.Raycast(cam.transform.position, cam.transform.forward + randomSpread(), out hit)){
-                    Debug.Log("HIT");
                     Instantiate(bullet, hit.point, hit.transform.rotation);
                     
                     if(hit.collider.tag == "Enemy"){
                         enemy.health = enemy.health - 6;
-                        Debug.Log(enemy.health);
                     }
                 }
                 if(Physics.Raycast(cam.transform.position, cam.transform.forward + randomSpread(), out hit)){
-                    Debug.Log("HIT");
                     Instantiate(bullet, hit.point, hit.transform.rotation);
                     
                     if(hit.collider.tag == "Enemy"){
                         enemy.health = enemy.health - 6;
-                        Debug.Log(enemy.health);
                     }
                 }
                 if(Physics.Raycast(cam.transform.position, cam.transform.forward + randomSpread(), out hit)){
-                    Debug.Log("HIT");
                     Instantiate(bullet, hit.point, hit.transform.rotation);
                     
                     if(hit.collider.tag == "Enemy"){
                         enemy.health = enemy.health - 6;
-                        Debug.Log(enemy.health);
                     }
                 }
                 if(Physics.Raycast(cam.transform.position, cam.transform.forward + randomSpread(), out hit)){
-                    Debug.Log("HIT");
                     Instantiate(bullet, hit.point, hit.transform.rotation);
                     
                     if(hit.collider.tag == "Enemy"){
                         enemy.health = enemy.health - 6;
-                        Debug.Log(enemy.health);
                     }
                 }
                 if(Physics.Raycast(cam.transform.position, cam.transform.forward + randomSpread(), out hit)){
-                    Debug.Log("HIT");
                     Instantiate(bullet, hit.point, hit.transform.rotation);
                     
                     if(hit.collider.tag == "Enemy"){
                         enemy.health = enemy.health - 6;
-                        Debug.Log(enemy.health);
                     }
                 }
 

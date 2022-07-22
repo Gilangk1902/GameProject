@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class PlasmaProjectile : MonoBehaviour
 {
-    public GameObject target; public GameObject spawn;
     public Rigidbody rb;
     public float force = 10000f;
     Vector3 endPoint; Vector3 startPoint;
     float distance; public float maxDistance = 10f;
+    private playerStat playerH;
+    public LayerMask playerMask;
     // Start is called before the first frame update
     void Start()
     {
         startPoint = transform.position;
-        
         GetComponent<Rigidbody>();
-        Debug.Log("test");
-
         rb.AddRelativeForce(0, 0, force*Time.deltaTime);
+        playerH = GameObject.Find("player").GetComponent<playerStat>();
         
     }
 
@@ -29,7 +28,14 @@ public class PlasmaProjectile : MonoBehaviour
         
         if(distance >= maxDistance){
             Destroy(gameObject);
-            Debug.Log("gone");
+        }
+        hit();
+    }
+
+    void hit(){
+        if(Physics.CheckSphere(transform.position, 5f, playerMask)){
+            playerH.playerHealth-=20f;
+            Destroy(gameObject);
         }
     }
 }

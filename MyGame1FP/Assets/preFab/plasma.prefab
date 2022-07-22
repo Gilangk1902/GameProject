@@ -130,3 +130,7 @@ MonoBehaviour:
   spawn: {fileID: 0}
   rb: {fileID: 6080992831454635634}
   force: 500000
+  maxDistance: 10
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 128
