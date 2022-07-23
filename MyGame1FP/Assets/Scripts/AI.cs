@@ -26,17 +26,22 @@ public class AI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerInSight = Physics.CheckSphere(transform.position, 50f, playerMask);
+        playerInSight = Physics.CheckSphere(transform.position, 40f, playerMask);
         playerInAttackRange = Physics.CheckSphere(transform.position, 15f, playerMask);
-        if(playerInAttackRange){
+        RaycastHit hit;
+        float thickness = 2f;
+        if(playerInAttackRange){  
+            agent.speed = 4f;
             targeting();
             positioning();
             attacking();
         }
-        else if(playerInSight){
+        else if(playerInSight && Physics.SphereCast(eye.transform.position, thickness, eye.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, playerMask)){
+            agent.speed = 4f;
             chasePlayer();
         }
         else if (!playerInSight){
+            agent.speed = 1f;
             patrol();
         }
     }
@@ -99,21 +104,26 @@ public class AI : MonoBehaviour
     }
     void randomManuver(){
         isMoving = true;
-        float randomZ = Random.Range(-50f, 50f);
-        float randomX = Random.Range(-50f, 50f);
+        float randomZ = Random.Range(-20f, 20f);
+        float randomX = Random.Range(-20f, 20f);
 
         runTo = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
         walkPointSet = true;
         lookAtDestination();
     }
     void patrol(){
-        isMoving = true;
-        float randomZ = Random.Range(-50f, 50f);
-        float randomX = Random.Range(-50f, 50f);
+        if(!walkPointSet && !isMoving){
+            standStillPatrol();
+        }
+        else if(!walkPointSet && isMoving){
+            randomManuver();
+        }
+        else if(walkPointSet && isMoving){
+            agent.SetDestination(runTo);
+            anim.SetFloat("Blend", 1f, 0.1f, Time.deltaTime);
+            Invoke("resetRandomWalk", 5f);
+        }
 
-        runTo = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-        walkPointSet = true;
-        lookAtDestination();
     }
     void chasePlayer(){
         runTo = player.position;
@@ -128,6 +138,13 @@ public class AI : MonoBehaviour
         agent.SetDestination(runTo);
         anim.SetFloat("Blend",0f, 0.1f, Time.deltaTime);
         lookAtPlayer();
+        Invoke("go",3f);
+    }
+    void standStillPatrol(){
+        runTo = transform.position;
+        agent.SetDestination(runTo);
+        anim.SetFloat("Blend",0f, 0.1f, Time.deltaTime);
+
         Invoke("go",3f);
     }
 

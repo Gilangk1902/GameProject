@@ -33,7 +33,7 @@ public class PlasmaProjectile : MonoBehaviour
     }
 
     void hit(){
-        if(Physics.CheckSphere(transform.position, 5f, playerMask)){
+        if(Physics.CheckSphere(transform.position, 2.5f, playerMask)){
             playerH.playerHealth-=20f;
             Destroy(gameObject);
         }
