@@ -126,11 +126,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 135f8f4dfdd9fae44bbfa2d17cb3fedf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  spawn: {fileID: 0}
   rb: {fileID: 6080992831454635634}
   force: 500000
-  maxDistance: 10
+  maxDistance: 1000
   playerMask:
     serializedVersion: 2
     m_Bits: 128
+  wall:
+    serializedVersion: 2
+    m_Bits: 8

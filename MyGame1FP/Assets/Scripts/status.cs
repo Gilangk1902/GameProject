@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class status : MonoBehaviour
 {
-    GameObject self;
     //STAT
     public float health = 100;
+    public GameObject self;
     void Start()
     {
-        self = GameObject.Find("Enemy");
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(health<=0){
+        if(health <= 0){
             Destroy(self);
         }
+        
     }
 }

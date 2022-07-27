@@ -27,7 +27,7 @@ public class AI : MonoBehaviour
     void Update()
     {
         playerInSight = Physics.CheckSphere(transform.position, 40f, playerMask);
-        playerInAttackRange = Physics.CheckSphere(transform.position, 15f, playerMask);
+        playerInAttackRange = Physics.CheckSphere(transform.position, 25f, playerMask);
         RaycastHit hit;
         float thickness = 2f;
         if(playerInAttackRange){  
@@ -36,7 +36,7 @@ public class AI : MonoBehaviour
             positioning();
             attacking();
         }
-        else if(playerInSight && Physics.SphereCast(eye.transform.position, thickness, eye.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, playerMask)){
+        else if(playerInSight ){
             agent.speed = 4f;
             chasePlayer();
         }

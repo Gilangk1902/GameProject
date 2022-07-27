@@ -9,9 +9,9 @@ public class shotGun : MonoBehaviour
     public Camera cam;
     private Animator anim;
     RaycastHit hit;
-
+    bool isreloading = false;
     //STATS
-    public float attackSpeed = 1.5f;
+    public float attackSpeed = 1f;
     bool wait = false;
     int ammo = 2;
 
@@ -19,7 +19,7 @@ public class shotGun : MonoBehaviour
     public status enemy;
     void Start()
     {
-        enemy = GameObject.Find("Enemy").GetComponent<status>();
+        enemy = GameObject.Find("Enemy 1").GetComponent<status>();
         anim = GetComponentInChildren<Animator>();
     }
 
@@ -35,70 +35,83 @@ public class shotGun : MonoBehaviour
                     Instantiate(bullet, hit.point, hit.transform.rotation);
                     
                     if(hit.collider.tag == "Enemy"){
-                        enemy.health = enemy.health - 6;
+                        status takeDamage = hit.collider.gameObject.GetComponent<status>();
+                        takeDamage.health -= 100;
                     }
                 }
                 if(Physics.Raycast(cam.transform.position, cam.transform.forward + randomSpread(), out hit)){
                     Instantiate(bullet, hit.point, hit.transform.rotation);
                     
                     if(hit.collider.tag == "Enemy"){
-                        enemy.health = enemy.health - 6;
+                        status takeDamage = hit.collider.gameObject.GetComponent<status>();
+                        takeDamage.health -= 100;
                     }
                 }
                 if(Physics.Raycast(cam.transform.position, cam.transform.forward + randomSpread(), out hit)){
                     Instantiate(bullet, hit.point, hit.transform.rotation);
                     
                     if(hit.collider.tag == "Enemy"){
-                        enemy.health = enemy.health - 6;
+                        status takeDamage = hit.collider.gameObject.GetComponent<status>();
+                        takeDamage.health -= 100;
                     }
                 }
                 if(Physics.Raycast(cam.transform.position, cam.transform.forward + randomSpread(), out hit)){
                     Instantiate(bullet, hit.point, hit.transform.rotation);
                     
                     if(hit.collider.tag == "Enemy"){
-                        enemy.health = enemy.health - 6;
+                        status takeDamage = hit.collider.gameObject.GetComponent<status>();
+                        takeDamage.health -= 100;
                     }
                 }
                 if(Physics.Raycast(cam.transform.position, cam.transform.forward + randomSpread(), out hit)){
                     Instantiate(bullet, hit.point, hit.transform.rotation);
                     
                     if(hit.collider.tag == "Enemy"){
-                        enemy.health = enemy.health - 6;
+                        status takeDamage = hit.collider.gameObject.GetComponent<status>();
+                        takeDamage.health -= 100;
                     }
                 }
                 if(Physics.Raycast(cam.transform.position, cam.transform.forward + randomSpread(), out hit)){
                     Instantiate(bullet, hit.point, hit.transform.rotation);
                     
                     if(hit.collider.tag == "Enemy"){
-                        enemy.health = enemy.health - 6;
+                        status takeDamage = hit.collider.gameObject.GetComponent<status>();
+                        takeDamage.health -= 100;
                     }
                 }
                 if(Physics.Raycast(cam.transform.position, cam.transform.forward + randomSpread(), out hit)){
                     Instantiate(bullet, hit.point, hit.transform.rotation);
                     
                     if(hit.collider.tag == "Enemy"){
-                        enemy.health = enemy.health - 6;
+                        status takeDamage = hit.collider.gameObject.GetComponent<status>();
+                        takeDamage.health -= 100;
                     }
                 }
                 if(Physics.Raycast(cam.transform.position, cam.transform.forward + randomSpread(), out hit)){
                     Instantiate(bullet, hit.point, hit.transform.rotation);
                     
                     if(hit.collider.tag == "Enemy"){
-                        enemy.health = enemy.health - 6;
+                        status takeDamage = hit.collider.gameObject.GetComponent<status>();
+                        takeDamage.health -= 100;
                     }
                 }
-
-                
                 Invoke("waitNoMore", attackSpeed);
             }
-            else if(ammo == 0){
+            else if(ammo == 0 && !isreloading && !wait){
                 anim.Play("reloading", 0, 0.0f);
-                Invoke("reloading", 2f);
+                Invoke("reloading", 3f);
+                isreloading = true;
             }
+        }
+        if(Input.GetKey(KeyCode.R) && ammo < 2 && !isreloading && !wait){
+            anim.Play("reloading", 0, 0.0f);
+            Invoke("reloading", 3f);
+            isreloading = true;
         }
     }
     void reloading(){
         ammo = 2;
+        isreloading = false;
     }
     void waitNoMore(){
         wait = false;

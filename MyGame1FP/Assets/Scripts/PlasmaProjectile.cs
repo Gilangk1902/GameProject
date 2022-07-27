@@ -7,9 +7,10 @@ public class PlasmaProjectile : MonoBehaviour
     public Rigidbody rb;
     public float force = 10000f;
     Vector3 endPoint; Vector3 startPoint;
-    float distance; public float maxDistance = 10f;
+    float distance; public float maxDistance = 10000000f;
     private playerStat playerH;
     public LayerMask playerMask;
+    public LayerMask wall;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +35,10 @@ public class PlasmaProjectile : MonoBehaviour
 
     void hit(){
         if(Physics.CheckSphere(transform.position, 2.5f, playerMask)){
-            playerH.playerHealth-=20f;
+            playerH.playerHealth-=5f;
+            Destroy(gameObject);
+        }
+        if(Physics.CheckSphere(transform.position, .5f, wall)){
             Destroy(gameObject);
         }
     }
